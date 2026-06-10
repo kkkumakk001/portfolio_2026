@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-       working-directory: portfolio_2026/my-app
+       working-directory: my-app
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,6 +39,7 @@ jobs:
         with:
           node-version: "24"
           cache: "npm"
+          cache-dependency-path: "my-app"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
