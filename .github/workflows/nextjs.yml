@@ -24,21 +24,25 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-       working-directory: portfolio_2026/my-app
+       working-directory: my-app
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "24"
           cache: "npm"
+          cache-dependency-path: "my-app"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
@@ -46,9 +50,9 @@ jobs:
       - name: Build with Next.js
         run: npm run build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: ./out
+          path: my-app/out
 
   # Deployment job
   deploy:
